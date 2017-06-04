@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="formValidationApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation App</title>
+    <link rel="stylesheet" href="FormValidation.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div ng-controller="FormValidationController">
+
+        <div class="page-header">
+            <h1 id="title">Form Validation</h1>
+        </div>
+
+        <form name="sendMoney" class="form-horizontal" novalidate>
+
+            <div class="form-group" ng-class="{'has-error': (sendMoney.$submitted || sendMoney.name.$touched) && sendMoney.name.$invalid}">
+                <label for="name" class="col-sm-2 control-label">Friend's name:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" required ng-minlength="3" ng-maxlength="15"
+                           type="text"
+                           id="name"
+                           name="name"
+                           ng-model="model.name"/>
+                    <div ng-messages="(sendMoney.$submitted || sendMoney.name.$touched) && sendMoney.name.$error" class="help-block">
+                        <div ng-message="required">This field is required</div>
+                        <div ng-message="minlength">The field is too short</div>
+                        <div ng-message="maxlength">The field is too long</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (sendMoney.$submitted || sendMoney.iban.$touched) && sendMoney.iban.$invalid}">
+                <label for="iban" class="col-sm-2 control-label">IBAN:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" required ng-minlength="24" ng-maxlength="24"
+                           type="input"
+                           id="iban"
+                           name="iban"
+                           ng-model="model.iban"/>
+                    <div ng-messages="(sendMoney.$submitted || sendMoney.iban.$touched) && sendMoney.iban.$error" class="help-block">
+                        <div ng-message="required">This field is required</div>
+                        <div ng-message="minlength">The field is too short</div>
+                        <div ng-message="maxlength">The field is too long</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (sendMoney.$submitted || sendMoney.amount.$touched) && sendMoney.amount.$invalid}">
+                <label for="amount" class="col-sm-2 control-label">Amount:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" required
+                           type="number" step="0.1"
+                           id="amount"
+                           name="amount"
+                           ng-model="model.amount"/>
+                    <div ng-messages="(sendMoney.$submitted || sendMoney.amount.$touched) && sendMoney.amount.$error" class="help-block">
+                        <div ng-message="required">This field is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': (sendMoney.$submitted || sendMoney.email.$touched) && sendMoney.email.$invalid}">
+                <label for="email" class="col-sm-2 control-label">Email:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" required
+                           type="email"
+                           id="email"
+                           name="email"
+                           ng-model="model.email"/>
+                    <div ng-messages="(sendMoney.$submitted || sendMoney.email.$touched) && sendMoney.email.$error" class="help-block">
+                        <div ng-message="required">This field is required</div>
+                        <div ng-message="email">Invalid email format</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Confirm</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-messages.js"></script>
+    <script src="FormValidation.js"></script>
+</body>
+
+</html>
